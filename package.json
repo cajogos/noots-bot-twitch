@@ -1,0 +1,28 @@
+{
+  "name": "noots-bot-twitch",
+  "version": "1.0.0",
+  "description": "Official Noots_Bot Twitch Bot repository.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NootArmy/twitch-bot.git"
+  },
+  "keywords": [
+    "twitch",
+    "bot",
+    "noot",
+    "noots"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@twurple/api": "^5.2.4",
+    "@twurple/auth": "^5.2.4",
+    "@twurple/chat": "^5.2.4",
+    "@twurple/eventsub": "^5.2.4"
+  }
+}

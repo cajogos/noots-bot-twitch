@@ -1,52 +1,44 @@
 import { RefreshingAuthProvider } from '@twurple/auth';
 import { ChatClient } from '@twurple/chat';
+import { clientId, clientSecret } from './credentials.js';
+
 import { promises as fs } from 'fs';
 
-import { clientId, clientSecret } from './credentials.js';
+const tokensFile = './tokens.json';
+const fileEncoding = 'UTF-8';
 
 async function main()
 {
-    const tokenData = JSON.parse(await fs.readFile('./tokens.json', 'UTF-8'));
-    console.log(clientId, clientSecret, tokenData);
-    const authProvider = new RefreshingAuthProvider(
-        {
-            clientId,
-            clientSecret,
-            onRefresh: async newTokenData => await fs.writeFile('./tokens.json', JSON.stringify(newTokenData, null, 4), 'UTF-8')
-        },
-        tokenData
-    );
+    const tokenData = JSON.parse(await fs.readFile(tokensFile, fileEncoding));
 
-    const chatClient = new ChatClient({ authProvider, channels: ['cajogos'] });
+    const authProvider = new RefreshingAuthProvider({
+        clientId, clientSecret,
+        onRefresh: async newTokenData => await fs.writeFile(
+            tokensFile,
+            JSON.stringify(newTokenData, null, 4),
+            fileEncoding
+        ),
+    }, tokenData);
+
+    const chatClient = new ChatClient({
+        authProvider,
+        channels: [
+            'pudgyycat',
+            'kingmcewan'
+        ]
+    });
+
+    chatClient.onMessage((channel, user, text) =>
+    {
+        console.log(`[${channel}] ${user}: ${text}`);
+
+        if (text === 'nootnoot')
+        {
+            chatClient.say(channel, 'NOOT NOOT!');
+        }
+    });
+
     await chatClient.connect();
-
-    chatClient.onMessage((channel, user, message) =>
-    {
-        if (message === '!ping')
-        {
-            chatClient.say(channel, 'Pong!');
-        }
-        else if (message === '!dice')
-        {
-            const diceRoll = Math.floor(Math.random() * 6) + 1;
-            chatClient.say(channel, `@${user} rolled a ${diceRoll}`)
-        }
-    });
-
-    chatClient.onSub((channel, user) =>
-    {
-        chatClient.say(channel, `Thanks to @${user} for subscribing to the channel!`);
-    });
-
-    chatClient.onResub((channel, user, subInfo) =>
-    {
-        chatClient.say(channel, `Thanks to @${user} for subscribing to the channel for a total of ${subInfo.months} months!`);
-    });
-
-    chatClient.onSubGift((channel, user, subInfo) =>
-    {
-        chatClient.say(channel, `Thanks to ${subInfo.gifter} for gifting a subscription to ${user}!`);
-    });
 }
 
 main();

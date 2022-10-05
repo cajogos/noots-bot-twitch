@@ -23,6 +23,7 @@
     "@twurple/api": "^5.2.4",
     "@twurple/auth": "^5.2.4",
     "@twurple/chat": "^5.2.4",
-    "@twurple/eventsub": "^5.2.4"
+    "@twurple/eventsub": "^5.2.4",
+    "node-fetch": "^3.2.10"
   }
 }

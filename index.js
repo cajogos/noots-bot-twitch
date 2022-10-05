@@ -2,6 +2,7 @@ import { RefreshingAuthProvider } from '@twurple/auth';
 import { ChatClient } from '@twurple/chat';
 import { ApiClient, ChattersList } from '@twurple/api';
 import { promises as fs } from 'fs';
+import fetch from 'node-fetch';
 
 import { clientId, clientSecret } from './credentials.js';
 
@@ -20,6 +21,14 @@ const trackedChannels = [
 const vipUsers = [
     'karrantula'
 ];
+
+// Get a list of random foods
+async function getRandomFood()
+{
+    const response = await fetch('https://www.themealdb.com/api/json/v1/1/random.php');
+    const data = await response.json();
+    return data.meals[0];
+}
 
 async function main()
 {
@@ -40,12 +49,32 @@ async function main()
         channels: trackedChannels
     });
 
-    // const apiClient = new ApiClient({ authProvider });
+    const apiClient = new ApiClient({ authProvider });
 
+    chatClient.onRaid((channel, user, raidInfo) =>
+    {
+        let message = '';
+        if (raidInfo.viewerCount === 1)
+        {
+            message = `Thanks for popping by @${user}!`;
+        }
+        else
+        {
+            message = `Thanks for bringing ${raidInfo.viewerCount} friends! @${user}!`;
+        }
+        chatClient.say(channel, message);
+    });
 
     chatClient.onMessage(async (channel, username, text) =>
     {
         console.log(`[${channel}] ${username}: ${text}`);
+
+        // Yeeks what's for tea!
+        if (text.includes('yeekayTea'))
+        {
+            const food = await getRandomFood();
+            chatClient.say(channel, `@${username} how about ${food.strMeal}? Kappa`);
+        }
 
         // if (vipUsers.includes(username))
         // {
@@ -73,24 +102,11 @@ async function main()
             chatClient.say(channel, 'NOOT NOOT!');
         }
 
-        if (username === 'pokemoncommunitygame')
-        {
-            console.log(`PCG said: ${text}`);
-            if (text.includes('appears'))
-            {
-                // Catch the pokemon
-                chatClient.say(channel, '!pokecatch');
-            }
-            else if (text.includes('don\'t own'))
-            {
-                // Buy a pokeball
-                chatClient.say(channel, '!pokeshop pokeball 3');
-            }
-        }
-
         if (text.startsWith('!pokecatch'))
         {
-            chatClient.say(channel, `Good luck with the catch @${username}!`);
+            chatClient.say(channel,
+                `Good luck with the catch @${username}! PowerUpL GlitchCat PowerUpR`
+            );
         }
 
         if (text.startsWith('!cajogos'))

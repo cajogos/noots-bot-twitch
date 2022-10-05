@@ -6,6 +6,7 @@ import fetch from 'node-fetch';
 
 import { clientId, clientSecret } from './credentials.js';
 import { randomFact } from './facts.js';
+import { getGeneralJoke, getKnockKnockJoke, getProgrammingJoke, getDadJoke } from './jokes.js';
 
 const tokensFile = './tokens.json';
 const fileEncoding = 'UTF-8';
@@ -77,23 +78,45 @@ async function main()
             chatClient.say(channel, `@${username} how about ${food.strMeal}? Kappa`);
         }
 
-        // if (vipUsers.includes(username))
-        // {
-        //     chatClient.say(channel, '!so ' + username);
-        // }
-
+        // Random fact
         if (text === '!fact')
         {
             chatClient.say(channel, `@${username} Here is a random fact: ` + randomFact());
         }
 
+        // Random joke
+        if (text.startsWith('!joke'))
+        {
+            let parts = text.split(' ');
+
+            let joke = null;
+            switch (parts[1])
+            {
+                case 'knockknock':
+                    joke = getKnockKnockJoke();
+                    break;
+                case 'programming':
+                    joke = getProgrammingJoke();
+                    break;
+                case 'dad':
+                    joke = getDadJoke();
+                    break;
+                default:
+                    joke = getGeneralJoke();
+                    break;
+            }
+
+            let message = `@${username} ${joke.setup} ${joke.punchline}`;
+            chatClient.say(channel, message);
+        }
+
+        // NOOT NOOT!
         let nootKeywords = [
             'nootnoot',
             'noot noot',
             'cajogoNootHYPE',
             'cajogoNootNoot'
         ];
-
         let shouldNoot = false;
         nootKeywords.forEach(keyword =>
         {
@@ -102,12 +125,12 @@ async function main()
                 shouldNoot = true;
             }
         });
-
         if (shouldNoot)
         {
             chatClient.say(channel, 'NOOT NOOT!');
         }
 
+        // Good luck pokecatch!
         if (text.startsWith('!pokecatch'))
         {
             chatClient.say(channel,
@@ -115,41 +138,13 @@ async function main()
             );
         }
 
+        // Shameless cajogos promo
         if (text.startsWith('!cajogos'))
         {
             chatClient.say(channel, `Find out more: https://cajogos.stream`);
         }
 
-        // const user = await apiClient.users.getUserByName(username);
-
-        // console.log('*** FOLLOWS ***');
-        // let follows = await apiClient.users.getFollows({ user: user.id });
-        // console.log(`${username} follows ${follows.total} channels`);
-        // for (const follow of follows.data)
-        // {
-        //     console.log(follow.followedUserId, follow.followedUserDisplayName, follow.followedUserName, follow.followDate.toLocaleDateString());
-        // }
-
-        // console.log('*** FOLLOWERS ***');
-        // let followers = await apiClient.users.getFollows({ followedUser: user.id });
-        // console.log(`${username} has ${followers.total} followers`);
-        // for (const follower of followers.data)
-        // {
-        //     console.log(follower.userId, follower.userDisplayName, follower.userName);
-        // }
-
-        // let channelUser = await apiClient.users.getUserByName(channel.replace('#', ''));
-        // let channelObject = await apiClient.channels.getChannelInfoById(channelUser.id);
-        // console.log(`${channelObject.displayName} is playing ${channelObject.gameName}.`);
-
-        // let chatters = await apiClient.unsupported.getChatters(channelObject.name);
-        // for (const chatter of chatters.allChattersWithStatus)
-        // {
-        //     console.log(chatter);
-        // }
     });
-
-
 
     await chatClient.connect();
 }

@@ -5,6 +5,7 @@ import { promises as fs } from 'fs';
 import fetch from 'node-fetch';
 
 import { clientId, clientSecret } from './credentials.js';
+import { randomFact } from './facts.js';
 
 const tokensFile = './tokens.json';
 const fileEncoding = 'UTF-8';
@@ -14,7 +15,7 @@ const trackedChannels = [
     'cajogos',
     'yeekaycrafts',
     'lifeofbeard',
-    'mrricardo94',
+    // 'mrricardo94',
     'karrantula'
 ];
 
@@ -80,6 +81,11 @@ async function main()
         // {
         //     chatClient.say(channel, '!so ' + username);
         // }
+
+        if (text === '!fact')
+        {
+            chatClient.say(channel, `@${username} Here is a random fact: ` + randomFact());
+        }
 
         let nootKeywords = [
             'nootnoot',

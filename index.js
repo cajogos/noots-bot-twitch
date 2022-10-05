@@ -13,7 +13,12 @@ const trackedChannels = [
     'cajogos',
     'yeekaycrafts',
     'lifeofbeard',
-    'mrricardo94'
+    'mrricardo94',
+    'karrantula'
+];
+
+const vipUsers = [
+    'karrantula'
 ];
 
 async function main()
@@ -35,45 +40,91 @@ async function main()
         channels: trackedChannels
     });
 
-    const apiClient = new ApiClient({ authProvider });
+    // const apiClient = new ApiClient({ authProvider });
 
 
     chatClient.onMessage(async (channel, username, text) =>
     {
         console.log(`[${channel}] ${username}: ${text}`);
 
-        if (text === 'nootnoot')
+        // if (vipUsers.includes(username))
+        // {
+        //     chatClient.say(channel, '!so ' + username);
+        // }
+
+        let nootKeywords = [
+            'nootnoot',
+            'noot noot',
+            'cajogoNootHYPE',
+            'cajogoNootNoot'
+        ];
+
+        let shouldNoot = false;
+        nootKeywords.forEach(keyword =>
+        {
+            if (text.toLowerCase().includes(keyword))
+            {
+                shouldNoot = true;
+            }
+        });
+
+        if (shouldNoot)
         {
             chatClient.say(channel, 'NOOT NOOT!');
+        }
 
-            const user = await apiClient.users.getUserByName(username);
-
-            console.log('*** FOLLOWS ***');
-            let follows = await apiClient.users.getFollows({ user: user.id });
-            console.log(`${username} follows ${follows.total} channels`);
-            for (const follow of follows.data)
+        if (username === 'pokemoncommunitygame')
+        {
+            console.log(`PCG said: ${text}`);
+            if (text.includes('appears'))
             {
-                console.log(follow.followedUserId, follow.followedUserDisplayName, follow.followedUserName, follow.followDate.toLocaleDateString());
+                // Catch the pokemon
+                chatClient.say(channel, '!pokecatch');
             }
-
-            console.log('*** FOLLOWERS ***');
-            let followers = await apiClient.users.getFollows({ followedUser: user.id });
-            console.log(`${username} has ${followers.total} followers`);
-            for (const follower of followers.data)
+            else if (text.includes('don\'t own'))
             {
-                console.log(follower.userId, follower.userDisplayName, follower.userName);
-            }
-
-            let channelUser = await apiClient.users.getUserByName(channel.replace('#', ''));
-            let channelObject = await apiClient.channels.getChannelInfoById(channelUser.id);
-            console.log(`${channelObject.displayName} is playing ${channelObject.gameName}.`);
-
-            let chatters = await apiClient.unsupported.getChatters(channelObject.name);
-            for (const chatter of chatters.allChattersWithStatus)
-            {
-                console.log(chatter);
+                // Buy a pokeball
+                chatClient.say(channel, '!pokeshop pokeball 3');
             }
         }
+
+        if (text.startsWith('!pokecatch'))
+        {
+            chatClient.say(channel, `Good luck with the catch @${username}!`);
+        }
+
+        if (text.startsWith('!cajogos'))
+        {
+            chatClient.say(channel, `Find out more: https://cajogos.stream`);
+        }
+
+        // const user = await apiClient.users.getUserByName(username);
+
+        // console.log('*** FOLLOWS ***');
+        // let follows = await apiClient.users.getFollows({ user: user.id });
+        // console.log(`${username} follows ${follows.total} channels`);
+        // for (const follow of follows.data)
+        // {
+        //     console.log(follow.followedUserId, follow.followedUserDisplayName, follow.followedUserName, follow.followDate.toLocaleDateString());
+        // }
+
+        // console.log('*** FOLLOWERS ***');
+        // let followers = await apiClient.users.getFollows({ followedUser: user.id });
+        // console.log(`${username} has ${followers.total} followers`);
+        // for (const follower of followers.data)
+        // {
+        //     console.log(follower.userId, follower.userDisplayName, follower.userName);
+        // }
+
+        // let channelUser = await apiClient.users.getUserByName(channel.replace('#', ''));
+        // let channelObject = await apiClient.channels.getChannelInfoById(channelUser.id);
+        // console.log(`${channelObject.displayName} is playing ${channelObject.gameName}.`);
+
+        // let chatters = await apiClient.unsupported.getChatters(channelObject.name);
+        // for (const chatter of chatters.allChattersWithStatus)
+        // {
+        //     console.log(chatter);
+        // }
     });
 
 

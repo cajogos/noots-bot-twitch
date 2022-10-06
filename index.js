@@ -11,11 +11,11 @@ import { getGeneralJoke, getKnockKnockJoke, getProgrammingJoke, getDadJoke } fro
 const tokensFile = './tokens.json';
 const fileEncoding = 'UTF-8';
 const trackedChannels = [
-    'pudgyycat',
-    'kingmcewan',
+    // 'pudgyycat',
+    // 'kingmcewan',
     'cajogos',
     'yeekaycrafts',
-    'lifeofbeard',
+    // 'lifeofbeard',
     // 'mrricardo94',
     'karrantula'
 ];

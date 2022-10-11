@@ -1651,7 +1651,7 @@ const jokes = {
         {
             "setup": "Which Pokémon could also be a pirate?",
             "punchline": "Arrrrrr-bok."
-        },
+        }
     ]
 }
 

@@ -1634,6 +1634,24 @@ const jokes = {
             "setup": "This graveyard looks overcrowded.",
             "punchline": "People must be dying to get in."
         }
+    ],
+    "pokemon": [
+        {
+            "setup": "What do you call a Pikachu that can fix computers?",
+            "punchline": "Geek-achu."
+        },
+        {
+            "setup": "What Pokémon do people see in auctions?",
+            "punchline": "Bidoof."
+        },
+        {
+            "setup": "Which sci-fi movie do Pokémon like the most?",
+            "punchline": "Staryu Wars."
+        },
+        {
+            "setup": "Which Pokémon could also be a pirate?",
+            "punchline": "Arrrrrr-bok."
+        }
     ]
 }
 
@@ -1657,4 +1675,9 @@ function getDadJoke()
     return jokes.dad[Math.floor(Math.random() * jokes.dad.length)];
 }
 
-export { getGeneralJoke, getKnockKnockJoke, getProgrammingJoke, getDadJoke };
+function getPokemonJoke()
+{
+    return jokes.pokemon[Math.floor(Math.random() * jokes.pokemon.length)];
+}
+
+export { getGeneralJoke, getKnockKnockJoke, getProgrammingJoke, getDadJoke, getPokemonJoke };

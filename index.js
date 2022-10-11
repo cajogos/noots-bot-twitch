@@ -6,7 +6,7 @@ import fetch from 'node-fetch';
 
 import { clientId, clientSecret } from './credentials.js';
 import { randomFact } from './facts.js';
-import { getGeneralJoke, getKnockKnockJoke, getProgrammingJoke, getDadJoke } from './jokes.js';
+import { getGeneralJoke, getKnockKnockJoke, getProgrammingJoke, getDadJoke, getPokemonJoke } from './jokes.js';
 
 const tokensFile = './tokens.json';
 const fileEncoding = 'UTF-8';
@@ -92,6 +92,9 @@ async function main()
             let joke = null;
             switch (parts[1])
             {
+                case 'pokemon':
+                    joke = getPokemonJoke();
+                    break;
                 case 'knockknock':
                     joke = getKnockKnockJoke();
                     break;

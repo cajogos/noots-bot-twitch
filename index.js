@@ -7,6 +7,7 @@ import fetch from 'node-fetch';
 import { clientId, clientSecret } from './credentials.js';
 import { randomFact } from './facts.js';
 import { getGeneralJoke, getKnockKnockJoke, getProgrammingJoke, getDadJoke, getPokemonJoke } from './jokes.js';
+import { getPokedexEntry } from './pokedex.js';
 
 const tokensFile = './tokens.json';
 const fileEncoding = 'UTF-8';
@@ -110,6 +111,17 @@ async function main()
             }
 
             let message = `@${username} ${joke.setup} ${joke.punchline}`;
+            chatClient.say(channel, message);
+        }
+        
+        // Get pokedex entry
+        if (text.startsWith('!pokedex'))
+        {
+            let parts = text.split (' ');
+            
+            let response = getPokedexEntry(parts[1]);
+            
+            let message = `@${username} ${response}`;
             chatClient.say(channel, message);
         }
 

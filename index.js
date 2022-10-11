@@ -1,26 +1,27 @@
 import { RefreshingAuthProvider } from '@twurple/auth';
 import { ChatClient } from '@twurple/chat';
-import { ApiClient, ChattersList } from '@twurple/api';
+import { ApiClient } from '@twurple/api';
 import { promises as fs } from 'fs';
 import fetch from 'node-fetch';
 
 import { clientId, clientSecret } from './credentials.js';
 import { randomFact } from './facts.js';
-import { getGeneralJoke, getKnockKnockJoke, getProgrammingJoke, getDadJoke, getPokemonJoke } from './jokes.js';
+import { getJoke } from './jokes.js';
 import { getPokedexEntry } from './pokedex.js';
 
 const tokensFile = './tokens.json';
 const fileEncoding = 'UTF-8';
 const trackedChannels = [
-    'pudgyycat',
-    'kingmcewan',
+    // 'pudgyycat',
+    // 'kingmcewan',
     'cajogos',
-    'yeekaycrafts',
-    'lifeofbeard',
-    'motleyverse',
-    'mrricardo94',
-    'karrantula',
-    'chef_brandon'
+    // 'yeekaycrafts',
+    // 'lifeofbeard',
+    // 'motleyverse',
+    // 'mrricardo94',
+    // 'karrantula',
+    // 'chef_brandon',
+    // 'AameeLark'
 ];
 
 const vipUsers = [
@@ -92,39 +93,19 @@ async function main()
         // Random joke
         if (text.startsWith('!joke'))
         {
-            let parts = text.split(' ');
-
-            let joke = null;
-            switch (parts[1])
-            {
-                case 'pokemon':
-                    joke = getPokemonJoke();
-                    break;
-                case 'knockknock':
-                    joke = getKnockKnockJoke();
-                    break;
-                case 'programming':
-                    joke = getProgrammingJoke();
-                    break;
-                case 'dad':
-                    joke = getDadJoke();
-                    break;
-                default:
-                    joke = getGeneralJoke();
-                    break;
-            }
+            let joke = getJoke(text.split(' ')[1]);
 
             let message = `@${username} ${joke.setup} ${joke.punchline}`;
             chatClient.say(channel, message);
         }
-        
+
         // Get pokedex entry
         if (text.startsWith('!pokedex'))
         {
             let parts = text.split(' ');
-            
+
             let response = getPokedexEntry(parts[1]);
-            
+
             let message = `@${username} ${response}`;
             chatClient.say(channel, message);
         }

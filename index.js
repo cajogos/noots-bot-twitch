@@ -12,10 +12,11 @@ const tokensFile = './tokens.json';
 const fileEncoding = 'UTF-8';
 const trackedChannels = [
     'pudgyycat',
-    // 'kingmcewan',
+    'kingmcewan',
     'cajogos',
     'yeekaycrafts',
-    // 'lifeofbeard',
+    'lifeofbeard',
+    'motleyverse',
     // 'mrricardo94',
     'karrantula'
 ];

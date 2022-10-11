@@ -117,7 +117,7 @@ async function main()
         // Get pokedex entry
         if (text.startsWith('!pokedex'))
         {
-            let parts = text.split (' ');
+            let parts = text.split(' ');
             
             let response = getPokedexEntry(parts[1]);
             

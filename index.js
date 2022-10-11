@@ -18,8 +18,9 @@ const trackedChannels = [
     'yeekaycrafts',
     'lifeofbeard',
     'motleyverse',
-    // 'mrricardo94',
-    'karrantula'
+    'mrricardo94',
+    'karrantula',
+    'chef_brandon'
 ];
 
 const vipUsers = [
@@ -71,7 +72,9 @@ async function main()
 
     chatClient.onMessage(async (channel, username, text) =>
     {
-        console.log(`[${channel}] ${username}: ${text}`);
+        // get the military time
+        const timestamp = new Date().toISOString();
+        console.log(`[${channel}] ${timestamp} ${username}: ${text}`);
 
         // Yeeks what's for tea!
         if (text.includes('yeekayTea'))

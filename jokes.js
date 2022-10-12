@@ -2,6 +2,9 @@ import fs from 'fs';
 
 const jokes = loadJokes();
 
+/**
+ * @returns {object}
+ */
 function loadJokes()
 {
     const jokeFiles = fs.readdirSync('./data/jokes');

@@ -2,15 +2,19 @@ import { RefreshingAuthProvider } from '@twurple/auth';
 import { ChatClient } from '@twurple/chat';
 import { ApiClient } from '@twurple/api';
 import { promises as fs } from 'fs';
-import fetch from 'node-fetch';
 
+// Commands
+import { randomFact } from './commands/facts.js';
+import { getJoke } from './commands/jokes.js';
+import { randomFood } from './commands/food.js';
+import { getPokedexEntry } from './pokedex.js'; // TODO: Fix this
+
+// Credentials Loading
 import { clientId, clientSecret } from './credentials.js';
-import { randomFact } from './facts.js';
-import { getJoke } from './jokes.js';
-import { getPokedexEntry } from './pokedex.js';
 
 const tokensFile = './tokens.json';
 const fileEncoding = 'UTF-8';
+
 const trackedChannels = [
     // 'pudgyycat',
     // 'kingmcewan',
@@ -23,18 +27,6 @@ const trackedChannels = [
     // 'chef_brandon',
     // 'AameeLark'
 ];
-
-const vipUsers = [
-    'karrantula'
-];
-
-// Get a list of random foods
-async function getRandomFood()
-{
-    const response = await fetch('https://www.themealdb.com/api/json/v1/1/random.php');
-    const data = await response.json();
-    return data.meals[0];
-}
 
 async function main()
 {
@@ -73,14 +65,12 @@ async function main()
 
     chatClient.onMessage(async (channel, username, text) =>
     {
-        // get the military time
-        const timestamp = new Date().toISOString();
-        console.log(`[${channel}] ${timestamp} ${username}: ${text}`);
+        console.log(`[${channel}] ${username}: ${text}`);
 
         // Yeeks what's for tea!
         if (text.includes('yeekayTea'))
         {
-            const food = await getRandomFood();
+            const food = await randomFood();
             chatClient.say(channel, `@${username} how about ${food.strMeal}? Kappa`);
         }
 

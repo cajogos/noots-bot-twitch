@@ -1,0 +1,40 @@
+{
+    "jokes": [
+        {
+            "setup": "Why do fathers take an extra pair of socks when they go golfing?",
+            "punchline": "In case they get a hole in one!"
+        },
+        {
+            "setup": "Why don't eggs tell jokes?",
+            "punchline": "Because they would crack each other up."
+        },
+        {
+            "setup": "I thought the dryer was shrinking my clothes.",
+            "punchline": "Turns out it was the refrigerator all along."
+        },
+        {
+            "setup": "I'm afraid for the calendar.",
+            "punchline": "Its days are numbered."
+        },
+        {
+            "setup": "What did the ocean say to the beach?",
+            "punchline": "Nothing, it just waved."
+        },
+        {
+            "setup": "Did you hear the rumor about butter?",
+            "punchline": "Well, I'm not going to spread it!"
+        },
+        {
+            "setup": "How many tickles does it take to make an octopus laugh?",
+            "punchline": "Ten tickles."
+        },
+        {
+            "setup": "What do you call cheese that isn't yours?",
+            "punchline": "Nacho cheese."
+        },
+        {
+            "setup": "This graveyard looks overcrowded.",
+            "punchline": "People must be dying to get in."
+        }
+    ]
+}

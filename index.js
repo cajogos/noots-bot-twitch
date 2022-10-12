@@ -8,7 +8,7 @@ import { randomFact } from './commands/facts.js';
 import { getJoke } from './commands/jokes.js';
 import { randomFood } from './commands/food.js';
 import { shouldNoot } from './commands/nootnoot.js';
-import { getPokedexEntry } from './pokedex.js'; // TODO: Fix this
+import { getPokedexEntry } from './commands/pokedex.js';
 
 // Credentials
 import { clientId, clientSecret } from './credentials.js';
@@ -103,14 +103,15 @@ async function main()
         }
 
         // Get pokedex entry
-        if (text.startsWith('!pokedex'))
+        if (text.startsWith('!pdex'))
         {
             let parts = text.split(' ');
-
-            let response = getPokedexEntry(parts[1]);
-
-            let message = `@${username} ${response}`;
-            chatClient.say(channel, message);
+            if (parts.length === 2)
+            {
+                let response = await getPokedexEntry(parts[1]);
+                let message = `@${username} ${response}`;
+                chatClient.say(channel, message);
+            }
         }
     });
 

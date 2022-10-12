@@ -9,24 +9,13 @@ import { getJoke } from './commands/jokes.js';
 import { randomFood } from './commands/food.js';
 import { getPokedexEntry } from './pokedex.js'; // TODO: Fix this
 
-// Credentials Loading
+// Credentials
 import { clientId, clientSecret } from './credentials.js';
+// Configuration
+import { trackedChannels } from './config.js';
 
 const tokensFile = './tokens.json';
 const fileEncoding = 'UTF-8';
-
-const trackedChannels = [
-    // 'pudgyycat',
-    // 'kingmcewan',
-    'cajogos',
-    // 'yeekaycrafts',
-    // 'lifeofbeard',
-    // 'motleyverse',
-    // 'mrricardo94',
-    // 'karrantula',
-    // 'chef_brandon',
-    // 'AameeLark'
-];
 
 async function main()
 {

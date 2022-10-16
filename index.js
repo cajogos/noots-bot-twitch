@@ -108,7 +108,7 @@ async function main()
         {
             let bonkedUser = text.split(' ')[1];
             bonkedUser = bonkedUser.replace('@', '');
-            chatClient.say(channel, `@${bonkedUser} BOP`);
+            chatClient.say(channel, `@${bonkedUser} BOP cajogoBonk`);
         }
 
         // Shameless cajogos promo

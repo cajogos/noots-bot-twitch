@@ -67,6 +67,13 @@ async function main()
             chatClient.say(channel, 'cajogoNootHYPE cajogoNootHYPE cajogoNootHYPE');
         }
 
+        // Noot HYPE!
+        if (text.startsWith('!noothype'))
+        {
+            let hypeText = 'cajogoEyes cajogoEyess cajogoNootHYPE cajogoEyes cajogoEyess cajogoNootHYPE cajogoEyes cajogoSZap cajogoNootHYPE cajogoEyess cajogoEyes cajogoLugia cajogoAstro cajogoBonk cajogoHYPE cajogoSZap cajogoNootNoot cajogoHYPE cajogoSZap cajogoLugia cajogoAstro cajogoEyes cajogoEyess cajogoNootHYPE cajogoBonk cajogoSZap cajogoHYPE cajogoNootNoot';
+            chatClient.say(channel, hypeText);
+        }
+
         // Yeeks what's for tea!
         if (text.includes('yeekayTea') || text.includes('yeekayWhatfortea'))
         {

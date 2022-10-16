@@ -67,6 +67,13 @@ async function main()
             chatClient.say(channel, 'cajogoNootHYPE cajogoNootHYPE cajogoNootHYPE');
         }
 
+        // Noot HYPE!
+        if (text.startsWith('!noothype'))
+        {
+            let hypeText = 'cajogoEyes cajogoEyess cajogoNootHYPE cajogoEyes cajogoEyess cajogoNootHYPE cajogoEyes cajogoSZap cajogoNootHYPE cajogoEyess cajogoEyes cajogoLugia cajogoAstro cajogoBonk cajogoHYPE cajogoSZap cajogoNootNoot cajogoHYPE cajogoSZap cajogoLugia cajogoAstro cajogoEyes cajogoEyess cajogoNootHYPE cajogoBonk cajogoSZap cajogoHYPE cajogoNootNoot';
+            chatClient.say(channel, hypeText);
+        }
+
         // Yeeks what's for tea!
         if (text.includes('yeekayTea') || text.includes('yeekayWhatfortea'))
         {
@@ -94,6 +101,43 @@ async function main()
             chatClient.say(channel,
                 `Good luck with the catch @${username}! PowerUpL GlitchCat PowerUpR`
             );
+        }
+
+        // Bonk command
+        if (text.startsWith('!bonk'))
+        {
+            let bonkedUser = text.split(' ')[1];
+            if (bonkedUser)
+            {
+                bonkedUser = bonkedUser.replace('@', '');
+                if (bonkedUser === 'cajogos')
+                {
+                    chatClient.say(channel, `@${username} I can't bonk the creator!`);
+                }
+                else
+                {
+                    chatClient.say(channel, `@${bonkedUser} BOP cajogoBonk`);
+                }
+            }
+            else
+            {
+                chatClient.say(channel, `@${username} Who do you want to bonk?`);
+            }
+        }
+
+        // Stare command
+        if (text.startsWith('!stare'))
+        {
+            let staredUser = text.split(' ')[1];
+            if (staredUser)
+            {
+                staredUser = staredUser.replace('@', '');
+                chatClient.say(channel, `@${staredUser} cajogoEyes cajogoEyes`);
+            }
+            else
+            {
+                chatClient.say(channel, `cajogoEyes cajogoEyes cajogoEyes`);
+            }
         }
 
         // Shameless cajogos promo

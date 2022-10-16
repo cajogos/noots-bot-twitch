@@ -14,8 +14,6 @@ async function getPokedexEntry(pokedexEntry)
     {
         const data = await response.json();
 
-        console.log(data);
-
         const speciesName = data.name.charAt(0).toUpperCase() + data.name.slice(1);
         let dexInfo = `${speciesName} (#${data.id})`;
         if (data.types.length === 2)

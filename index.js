@@ -96,6 +96,14 @@ async function main()
             );
         }
 
+        // Bonk command
+        if (text.startsWith('!bonk'))
+        {
+            let bonkedUser = text.split(' ')[1];
+            bonkedUser = bonkedUser.replace('@', '');
+            chatClient.say(channel, `@${bonkedUser} BOP`);
+        }
+
         // Shameless cajogos promo
         if (text.startsWith('!cajogos'))
         {

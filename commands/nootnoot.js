@@ -12,8 +12,7 @@ function shouldNoot(text)
     let nootKeywords = [
         'nootnoot',
         'noot noot',
-        'cajogoNootHYPE',
-        'cajogoNootNoot'
+        'noothype'
     ];
 
     for (let i = 0; i < nootKeywords.length; i++)

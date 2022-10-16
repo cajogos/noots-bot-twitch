@@ -107,8 +107,37 @@ async function main()
         if (text.startsWith('!bonk'))
         {
             let bonkedUser = text.split(' ')[1];
-            bonkedUser = bonkedUser.replace('@', '');
-            chatClient.say(channel, `@${bonkedUser} BOP cajogoBonk`);
+            if (bonkedUser)
+            {
+                bonkedUser = bonkedUser.replace('@', '');
+                if (bonkedUser === 'cajogos')
+                {
+                    chatClient.say(channel, `@${username} I can't bonk the creator!`);
+                }
+                else
+                {
+                    chatClient.say(channel, `@${bonkedUser} BOP cajogoBonk`);
+                }
+            }
+            else
+            {
+                chatClient.say(channel, `@${username} Who do you want to bonk?`);
+            }
+        }
+
+        // Stare command
+        if (text.startsWith('!stare'))
+        {
+            let staredUser = text.split(' ')[1];
+            if (staredUser)
+            {
+                staredUser = staredUser.replace('@', '');
+                chatClient.say(channel, `@${staredUser} cajogoEyes cajogoEyes`);
+            }
+            else
+            {
+                chatClient.say(channel, `cajogoEyes cajogoEyes cajogoEyes`);
+            }
         }
 
         // Shameless cajogos promo

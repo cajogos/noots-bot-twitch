@@ -81,6 +81,12 @@ async function main()
             chatClient.say(channel, `@${username} how about ${food.strMeal}? Kappa`);
         }
 
+        // I have no money song
+        if (text.startsWith('!nomoney'))
+        {
+            chatClient.say(channel, 'I have no money SingsNote I have no money SingsNote I have no money SingsNote I have no money SingsNote');
+        }
+
         // Random fact
         if (text === '!fact')
         {

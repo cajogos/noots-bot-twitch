@@ -10,6 +10,7 @@ import { randomFood } from './commands/food.js';
 import { shouldNoot } from './commands/nootnoot.js';
 import { getPokedexEntry } from './commands/pokedex.js';
 import cointoss from './commands/cointoss.js';
+import { gibeResponse, hazResponse } from './commands/basic-responder.js';
 
 // Credentials
 import { clientId, clientSecret } from './credentials.js';
@@ -62,17 +63,15 @@ async function main()
     {
         console.log(`[${channel}] ${username}: ${text}`);
 
+        /* starts with lookup*/
+        if(hazResponse(text)){
+            chatClient.say(channel,gibeResponse(text))
+        }
+        
         // Noot Noot!
         if (shouldNoot(text))
         {
             chatClient.say(channel, 'cajogoNootHYPE cajogoNootHYPE cajogoNootHYPE');
-        }
-
-        // Noot HYPE!
-        if (text.startsWith('!noothype'))
-        {
-            let hypeText = 'cajogoEyes cajogoEyess cajogoNootHYPE cajogoEyes cajogoEyess cajogoNootHYPE cajogoEyes cajogoSZap cajogoNootHYPE cajogoEyess cajogoEyes cajogoLugia cajogoAstro cajogoBonk cajogoHYPE cajogoSZap cajogoNootNoot cajogoHYPE cajogoSZap cajogoLugia cajogoAstro cajogoEyes cajogoEyess cajogoNootHYPE cajogoBonk cajogoSZap cajogoHYPE cajogoNootNoot';
-            chatClient.say(channel, hypeText);
         }
 
         // Yeeks what's for tea!
@@ -80,12 +79,6 @@ async function main()
         {
             const food = await randomFood();
             chatClient.say(channel, `@${username} how about ${food.strMeal}? Kappa`);
-        }
-
-        // I have no money song
-        if (text.startsWith('!nomoney'))
-        {
-            chatClient.say(channel, 'I have no money SingsNote I have no money SingsNote I have no money SingsNote I have no money SingsNote');
         }
 
         // Random fact
@@ -150,12 +143,6 @@ async function main()
             {
                 chatClient.say(channel, `cajogoEyes cajogoEyes cajogoEyes`);
             }
-        }
-
-        // Shameless cajogos promo
-        if (text.startsWith('!cajogos'))
-        {
-            chatClient.say(channel, `I was made by @cajogos! Find out more: https://cajogos.stream`);
         }
 
         // Get pokedex entry

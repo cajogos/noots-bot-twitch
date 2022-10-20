@@ -9,6 +9,7 @@ import { getJoke } from './commands/jokes.js';
 import { randomFood } from './commands/food.js';
 import { shouldNoot } from './commands/nootnoot.js';
 import { getPokedexEntry } from './commands/pokedex.js';
+import cointoss from './commands/cointoss.js';
 import { gibeResponse, hazResponse } from './commands/basic-responder.js';
 
 // Credentials
@@ -84,6 +85,11 @@ async function main()
         if (text === '!fact')
         {
             chatClient.say(channel, `@${username} Here is a random fact: ` + randomFact());
+        }
+
+        if (text.startsWith('!cointoss'))
+        {
+            chatClient.say(channel, ` @${username} tossed a coin! And the result is... ${cointoss()} cajogoEyes`);
         }
 
         // Random joke

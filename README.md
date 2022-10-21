@@ -73,10 +73,10 @@ You can add multiple twtich users if you want to work with multiple chats by sep
 #### credentials.js
 
 In `credentials.js` update the two variables to contain the credentials we collected from https://dev.twitch.tv/console/apps
-
+```
 const clientId = 'Your Client ID';
 const clientSecret = 'Your Client Secret';
-
+```
 ### Configure Twurple
 
 #### tokens.json

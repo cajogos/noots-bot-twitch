@@ -1,7 +1,9 @@
-export default function cointoss(){
+export default function cointoss()
+{
     let random = Math.floor(Math.random() * 10);
-    if(random % 2){
-        return "HEADS";
+    if (random % 2)
+    {
+        return 'HEADS';
     }
-    return "TAILS";
+    return 'TAILS';
 }

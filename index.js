@@ -64,10 +64,11 @@ async function main()
         console.log(`[${channel}] ${username}: ${text}`);
 
         /* starts with lookup*/
-        if(hazResponse(text)){
-            chatClient.say(channel,gibeResponse(text))
+        if (hazResponse(text))
+        {
+            chatClient.say(channel, gibeResponse(text))
         }
-        
+
         // Noot Noot!
         if (shouldNoot(text))
         {
@@ -103,9 +104,7 @@ async function main()
         // Good luck pokecatch!
         if (text.startsWith('!pokecatch'))
         {
-            chatClient.say(channel,
-                `Good luck with the catch @${username}! PowerUpL GlitchCat PowerUpR`
-            );
+            chatClient.say(channel, `Good luck with the catch @${username}! PowerUpL GlitchCat PowerUpR`);
         }
 
         // Bonk command
@@ -127,6 +126,39 @@ async function main()
             else
             {
                 chatClient.say(channel, `@${username} Who do you want to bonk?`);
+            }
+        }
+
+        // Hug command
+        if (text.startsWith('!hug'))
+        {
+            let huggedUser = text.split(' ')[1];
+            if (huggedUser)
+            {
+                huggedUser = huggedUser.replace('@', '');
+                chatClient.say(channel, `@${username} is hugging @${huggedUser} <3 <3 <3`);
+            }
+            else
+            {
+                chatClient.say(channel, `@${username} Who do you want to hug?`);
+            }
+        }
+
+        // Punch command
+        if (text.startsWith('!punch'))
+        {
+            let punchedUser = text.split(' ')[1];
+            if (punchedUser)
+            {
+                punchedUser = punchedUser.replace('@', '');
+                if (punchedUser === 'cajogos')
+                {
+                    chatClient.say(channel, `@${username} I can't punch the creator!`);
+                }
+                else
+                {
+                    chatClient.say(channel, `@${username} is punching @${punchedUser} cajogoEyes`);
+                }
             }
         }
 

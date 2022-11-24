@@ -3,6 +3,8 @@ import { ChatClient } from '@twurple/chat';
 import { ApiClient } from '@twurple/api';
 import { promises as fs } from 'fs';
 
+import ActiveChatManager from './classes/ActiveChatManager.js';
+
 // Commands
 import { randomFact } from './commands/facts.js';
 import { getJoke } from './commands/jokes.js';
@@ -16,6 +18,7 @@ import { gibeResponse, hazResponse } from './commands/basic-responder.js';
 import { clientId, clientSecret } from './credentials.js';
 // Configuration
 import { trackedChannels } from './config.js';
+import { doGibeaway } from './commands/gibeaway.js';
 
 const tokensFile = './tokens.json';
 const fileEncoding = 'UTF-8';
@@ -43,6 +46,9 @@ async function main()
     // API Client
     const apiClient = new ApiClient({ authProvider });
 
+    // Active chatters
+    const chatActive = new ActiveChatManager();
+
     // When a raid to the channel happens
     chatClient.onRaid((channel, user, raidInfo) =>
     {
@@ -62,6 +68,20 @@ async function main()
     chatClient.onMessage(async (channel, username, text) =>
     {
         console.log(`[${channel}] ${username}: ${text}`);
+
+        // Add user to active chat list
+        chatActive.addUserToChannel(channel, username);
+
+        const chatters = chatActive.getUsersInChannel(channel);
+
+        console.log('active chatters', chatters);
+
+        // Gibeaway command
+        if (text === '!gibeaway')
+        {
+            const winner = doGibeaway(chatters);
+            chatClient.say(channel, `The winner is @${winner}!`);
+        }
 
         /* starts with lookup*/
         if (hazResponse(text))

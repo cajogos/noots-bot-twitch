@@ -75,6 +75,16 @@ async function main()
             chatClient.say(channel, 'cajogoNootHYPE cajogoNootHYPE cajogoNootHYPE');
         }
 
+        // Good bot / bad bot
+        if (text.toLowerCase().includes('good bot'))
+        {
+            chatClient.say(channel, `Thank you @${username}! cajogoNootHYPE`);
+        }
+        else if (text.toLowerCase().includes('bad bot'))
+        {
+            chatClient.say(channel, `u wut m8 @${username} cajogoEyes`);
+        }
+
         // Yeeks what's for tea!
         if (text.includes('yeekayTea') || text.includes('yeekayWhatfortea'))
         {

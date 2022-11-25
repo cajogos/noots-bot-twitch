@@ -2,6 +2,7 @@ export default class ActiveChatManager
 {
     constructor()
     {
+        this.TIME_FOR_ACTIVE = 1000 * 60 * 20; // 20 minutes
         this.channels = [];
     }
 
@@ -13,11 +14,22 @@ export default class ActiveChatManager
             this.channels[channel] = [];
         }
 
-        this.channels[channel].push(user);
+        this.channels[channel][user] = Date.now();
     }
 
-    getUsersInChannel(channel)
+    getActiveUsersInChannel(channel)
     {
-        return this.channels[channel];
+        let now = Date.now();
+        let actuallyActive = [];
+
+        for (let user in this.channels[channel])
+        {
+            if ((now - this.channels[channel][user]) < this.TIME_FOR_ACTIVE)
+            {
+                actuallyActive.push(user);
+            }
+        }
+
+        return actuallyActive;
     }
 }

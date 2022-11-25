@@ -69,17 +69,17 @@ async function main()
     {
         console.log(`[${channel}] ${username}: ${text}`);
 
+        const channelOwner = channel.split('#')[1];
+        const isChannelOwner = username === channelOwner;
+
         // Add user to active chat list
         chatActive.addUserToChannel(channel, username);
-
-        const chatters = chatActive.getUsersInChannel(channel);
-
-        console.log('active chatters', chatters);
+        const activeChatters = chatActive.getActiveUsersInChannel(channel);
 
         // Gibeaway command
-        if (text === '!gibeaway')
+        if (isChannelOwner && text === '!gibeaway' && activeChatters.length > 0)
         {
-            const winner = doGibeaway(chatters);
+            const winner = doGibeaway(activeChatters);
             chatClient.say(channel, `The winner is @${winner}!`);
         }
 
@@ -103,6 +103,19 @@ async function main()
         else if (text.toLowerCase().includes('bad bot'))
         {
             chatClient.say(channel, `u wut m8 @${username} cajogoEyes`);
+        }
+
+        // Sees booba in chat
+        if (text.toLowerCase().includes('booba'))
+        {
+            chatClient.say(channel, `GivePLZ Booba TakeNRG`);
+        }
+
+        // LUL multiplier
+        if (text.includes('LUL'))
+        {
+            const lulCount = text.split('LUL').length - 1;
+            chatClient.say(channel, `LUL ${'LUL '.repeat(lulCount)}`);
         }
 
         // Yeeks what's for tea!

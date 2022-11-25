@@ -29,7 +29,7 @@ function gibeResponse(command)
  */
 function sanitizeCommand(command)
 {
-   return command.toLowerCase().trim().split(" ")[0]
+   return command.toLowerCase().trim().split(" ")[0];
 }
 
 /**

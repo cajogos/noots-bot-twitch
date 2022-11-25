@@ -3,6 +3,8 @@ import { ChatClient } from '@twurple/chat';
 import { ApiClient } from '@twurple/api';
 import { promises as fs } from 'fs';
 
+import ActiveChatManager from './classes/ActiveChatManager.js';
+
 // Commands
 import { randomFact } from './commands/facts.js';
 import { getJoke } from './commands/jokes.js';
@@ -16,6 +18,7 @@ import { gibeResponse, hazResponse } from './commands/basic-responder.js';
 import { clientId, clientSecret } from './credentials.js';
 // Configuration
 import { trackedChannels } from './config.js';
+import { doGibeaway } from './commands/gibeaway.js';
 
 const tokensFile = './tokens.json';
 const fileEncoding = 'UTF-8';
@@ -43,6 +46,9 @@ async function main()
     // API Client
     const apiClient = new ApiClient({ authProvider });
 
+    // Active chatters
+    const chatActive = new ActiveChatManager();
+
     // When a raid to the channel happens
     chatClient.onRaid((channel, user, raidInfo) =>
     {
@@ -63,6 +69,20 @@ async function main()
     {
         console.log(`[${channel}] ${username}: ${text}`);
 
+        const channelOwner = channel.split('#')[1];
+        const isChannelOwner = username === channelOwner;
+
+        // Add user to active chat list
+        chatActive.addUserToChannel(channel, username);
+        const activeChatters = chatActive.getActiveUsersInChannel(channel);
+
+        // Gibeaway command
+        if (isChannelOwner && text === '!gibeaway' && activeChatters.length > 0)
+        {
+            const winner = doGibeaway(activeChatters);
+            chatClient.say(channel, `The winner is @${winner}!`);
+        }
+
         /* starts with lookup*/
         if (hazResponse(text))
         {
@@ -73,6 +93,29 @@ async function main()
         if (shouldNoot(text))
         {
             chatClient.say(channel, 'cajogoNootHYPE cajogoNootHYPE cajogoNootHYPE');
+        }
+
+        // Good bot / bad bot
+        if (text.toLowerCase().includes('good bot'))
+        {
+            chatClient.say(channel, `Thank you @${username}! cajogoNootHYPE`);
+        }
+        else if (text.toLowerCase().includes('bad bot'))
+        {
+            chatClient.say(channel, `u wut m8 @${username} cajogoEyes`);
+        }
+
+        // Sees booba in chat
+        if (text.toLowerCase().includes('booba'))
+        {
+            chatClient.say(channel, `GivePLZ Booba TakeNRG`);
+        }
+
+        // LUL multiplier
+        if (text.includes('LUL'))
+        {
+            const lulCount = text.split('LUL').length - 1;
+            chatClient.say(channel, `LUL ${'LUL '.repeat(lulCount)}`);
         }
 
         // Yeeks what's for tea!

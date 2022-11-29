@@ -111,6 +111,12 @@ async function main()
             chatClient.say(channel, `GivePLZ Booba TakeNRG`);
         }
 
+	// Sees butt in chat
+	if (text.toLowerCase().includes('butt'))
+	{
+	    chatClient.say(channel, `GivePLZ Butt TakeNRG`);
+	}
+
         // LUL multiplier
         if (text.includes('LUL'))
         {

@@ -17,7 +17,7 @@ import { gibeResponse, hazResponse } from './commands/basic-responder.js';
 // Credentials
 import { clientId, clientSecret } from './credentials.js';
 // Configuration
-import { trackedChannels } from './config.js';
+import { trackedChannels, botName } from './config.js';
 import { doGibeaway } from './commands/gibeaway.js';
 
 const tokensFile = './tokens.json';
@@ -69,6 +69,12 @@ async function main()
     {
         console.log(`[${channel}] ${username}: ${text}`);
 
+        // Ignore itself - if there are multiple bots
+        if (username.toLocaleLowerCase() === botName.toLocaleLowerCase())
+        {
+            return;
+        }
+
         const channelOwner = channel.split('#')[1];
         const isChannelOwner = username === channelOwner;
 
@@ -83,7 +89,7 @@ async function main()
             chatClient.say(channel, `The winner is @${winner}!`);
         }
 
-        /* starts with lookup*/
+        // Starts with a response
         if (hazResponse(text))
         {
             chatClient.say(channel, gibeResponse(text))
@@ -93,6 +99,13 @@ async function main()
         if (shouldNoot(text))
         {
             chatClient.say(channel, 'cajogoNootHYPE cajogoNootHYPE cajogoNootHYPE');
+        }
+
+        // Manifest command
+        if (text.startsWith('!manifest'))
+        {
+            const manifest = text.split('!manifest')[1].trim();
+            chatClient.say(channel, `✨ ${manifest} ✨`);
         }
 
         // Good bot / bad bot
@@ -111,11 +124,11 @@ async function main()
             chatClient.say(channel, `GivePLZ Booba TakeNRG`);
         }
 
-	// Sees butt in chat
-	if (text.toLowerCase().includes('butt'))
-	{
-	    chatClient.say(channel, `GivePLZ Butt TakeNRG`);
-	}
+        // Sees butt in chat
+        if (text.toLowerCase().includes('butt'))
+        {
+            chatClient.say(channel, `GivePLZ Butt TakeNRG`);
+        }
 
         // LUL multiplier
         if (text.includes('LUL'))

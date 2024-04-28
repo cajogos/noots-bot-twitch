@@ -28,15 +28,9 @@
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠚⠛⠛⠛⠛⠛⠛⠛⠛⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ```
 
-## Get Started
+## Getting Started
 
 Before you get started you will need to link the bot to your twitch account. This will enable you to debug the code with your chat.
-
-You also need the following software:
-
-NodeJS (Get the recommended version): https://nodejs.org/en/
-
-Postman (you dont need to sign up): https://www.postman.com/downloads/
 
 Twitch Account
 
@@ -58,7 +52,7 @@ IMPORTANT: Take note of your **Client ID** and create a **New Secret** we will n
 
 ### Add your credentials to the bot
 
-In the repo there are two files `config.example.js` and `credentials.example.js`. 
+In the repo there are two files `config.example.js` and `credentials.example.js`.
 
 Create two files called `config.js` and `credentials.js`.
 
@@ -66,7 +60,7 @@ Copy the contents of their respective example files into the two files you creat
 
 #### config.js
 
-In `config.js` change `'cajogos'` to be your twitch username. This tells the bot to listen to your chat. 
+In `config.js` change `'cajogos'` to be your twitch username. This tells the bot to listen to your chat.
 
 You can add multiple twtich users if you want to work with multiple chats by separating their names with a comma: `'cajogos','yeekaycrafts','pudgyycat'`
 
@@ -102,10 +96,10 @@ Twitch will ask permission to link the bot with your Twitch account. This enable
 
 Don't close the browser/tab yet! After clicking Authorize you will be redirected copy the url into a text editor. There should be a query parameter named `code` we will need this for the next step.
 
-Open Postman and send a POST request to the this url replacing: 
+Open Postman and send a POST request to the this url replacing:
 
-`CLIENT_ID` with your client id 
-`CLIENT_SECRET` with your client secret 
+`CLIENT_ID` with your client id
+`CLIENT_SECRET` with your client secret
 `CODE_FROM_LAST_REQUEST` with the code we obtained in the previous step
 
 `https://id.twitch.tv/oauth2/token?client_id=CLIENT_ID&client_secret=CLIENT_SECRET&code=CODE_FROM_LAST_REQUEST&grant_type=authorization_code&redirect_uri=http://localhost`

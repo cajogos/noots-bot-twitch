@@ -43,6 +43,16 @@ async function main()
         channels: trackedChannels
     });
 
+    const isWordOrContains = (text, word) =>
+    {
+        text = text.toLowerCase();
+        word = word.toLowerCase();
+
+        if (text === word) return true;
+
+        return text.includes(` ${word} `) || text.startsWith(`${word} `) || text.endsWith(` ${word}`);
+    };
+
     // API Client
     const apiClient = new ApiClient({ authProvider });
 
@@ -92,7 +102,7 @@ async function main()
         // Starts with a response
         if (hazResponse(text))
         {
-            chatClient.say(channel, gibeResponse(text))
+            chatClient.say(channel, gibeResponse(text));
         }
 
         // Noot Noot!
@@ -109,23 +119,23 @@ async function main()
         }
 
         // Good bot / bad bot
-        if (text.toLowerCase().includes('good bot'))
+        if (isWordOrContains(text, 'good bot'))
         {
             chatClient.say(channel, `Thank you @${username}! cajogoNootHYPE`);
         }
-        else if (text.toLowerCase().includes('bad bot'))
+        else if (isWordOrContains(text, 'bad bot'))
         {
             chatClient.say(channel, `u wut m8 @${username} cajogoEyes`);
         }
 
         // Sees booba in chat
-        if (text.toLowerCase().includes('booba'))
+        if (isWordOrContains(text, 'booba'))
         {
             chatClient.say(channel, `GivePLZ Booba TakeNRG`);
         }
 
         // Sees butt in chat
-        if (text.toLowerCase().includes('butt'))
+        if (isWordOrContains(text, 'butt'))
         {
             chatClient.say(channel, `GivePLZ Butt TakeNRG`);
         }
@@ -138,7 +148,7 @@ async function main()
         }
 
         // Yeeks what's for tea!
-        if (text.includes('yeekayTea') || text.includes('yeekayWhatfortea'))
+        if (text.includes('yeekayTea') || text.includes('yeekayWhatfortea') || text === "What's for tea?")
         {
             const food = await randomFood();
             chatClient.say(channel, `@${username} how about ${food.strMeal}? Kappa`);

@@ -148,7 +148,7 @@ async function main()
         }
 
         // Yeeks what's for tea!
-        if (text.includes('yeekayTea') || text.includes('yeekayWhatfortea') || text === "What's for tea?")
+        if (text.includes('yeekayTea') || text.includes('yeekayWhatfortea') || text.toLocaleLowerCase() === "what's for tea?")
         {
             const food = await randomFood();
             chatClient.say(channel, `@${username} how about ${food.strMeal}? Kappa`);

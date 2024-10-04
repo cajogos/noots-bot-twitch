@@ -45,12 +45,8 @@ async function main()
 
     const isWordOrContains = (text, word) =>
     {
-        text = text.toLowerCase();
-        word = word.toLowerCase();
-
-        if (text === word) return true;
-
-        return text.includes(` ${word} `) || text.startsWith(`${word} `) || text.endsWith(` ${word}`);
+        const wordBoundaryRegex = new RegExp(`\\b${word}\\b`, 'i');
+        return wordBoundaryRegex.test(text);
     };
 
     // API Client

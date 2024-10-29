@@ -123,6 +123,10 @@ async function main()
         {
             chatClient.say(channel, `u wut m8 @${username} cajogoEyes`);
         }
+        else if (isWordOrContains(text, 'kinky bot'))
+        {
+            chatClient.say(channel, `u wut @${username} PixelBob`);
+        }
 
         // Sees booba in chat
         if (isWordOrContains(text, 'booba'))

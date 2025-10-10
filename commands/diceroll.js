@@ -1,11 +1,18 @@
 /**
- * @param {string} diceType - Optional parameter for dice type ("d20" for 20-sided, anything else for 6-sided)
+ * @param {string} commandText - The full command text to parse for dice type
  * @returns {string}
  */
-function diceroll(diceType = "")
+function diceroll(commandText = "")
 {
+    // Parse the command text to check for d20
+    const parts = commandText.split(' ');
+    const hasD20 = parts.some(part =>
+        part.toLowerCase().includes("d20") ||
+        part.toLowerCase().includes("20")
+    );
+
     // Check if user wants a d20 roll
-    if (diceType.toLowerCase().includes("d20") || diceType.toLowerCase().includes("20"))
+    if (hasD20)
     {
         const roll = Math.floor(Math.random() * 20) + 1;
         return `🎲 D20: ${roll}`;

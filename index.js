@@ -183,7 +183,7 @@ async function main()
         // Diceroll command
         if (text.startsWith('!diceroll'))
         {
-            chatClient.say(channel, `@${username} rolled a ${diceroll()}`);
+            chatClient.say(channel, `@${username} ${diceroll(text)}`);
         }
 
         // Random joke

@@ -19,6 +19,7 @@ import { clientId, clientSecret } from './credentials.js';
 // Configuration
 import { trackedChannels, botName } from './config.js';
 import { doGibeaway } from './commands/gibeaway.js';
+import { diceroll } from './commands/diceroll.js';
 
 const tokensFile = './tokens.json';
 const fileEncoding = 'UTF-8';
@@ -177,6 +178,12 @@ async function main()
         if (text.startsWith('!cointoss'))
         {
             chatClient.say(channel, ` @${username} tossed a coin! And the result is... ${cointoss()} cajogoEyes`);
+        }
+
+        // Diceroll command
+        if (text.startsWith('!diceroll'))
+        {
+            chatClient.say(channel, `@${username} rolled a ${diceroll()}`);
         }
 
         // Random joke

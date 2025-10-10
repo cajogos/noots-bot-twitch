@@ -40,6 +40,18 @@ async function getPokedexEntry(pokedexEntry)
             case 420:
                 dexInfo += ' Blaze it! \u{1F525}';
                 break;
+            case 666:
+                dexInfo += ' 👿 The number of the beast!';
+                break;
+            case 151:
+                dexInfo += ' The OG mythical Pokemon!';
+                break;
+            case 25:
+                dexInfo += ' Pika pika!';
+                break;
+            case 143:
+                dexInfo += ' *loud snoring noises* 💤';
+                break;
         }
 
         return dexInfo;

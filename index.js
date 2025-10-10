@@ -128,6 +128,20 @@ async function main()
             chatClient.say(channel, `u wut @${username} PixelBob`);
         }
 
+        // Claim command
+        if (text.startsWith('!claim'))
+        {
+            const theClaim = text.split('!claim')[1].trim();
+            if (theClaim.length === 0)
+            {
+                chatClient.say(channel, `@${username} has claimed whatever @${channelOwner} is currently showing!`);
+            }
+            else
+            {
+                chatClient.say(channel, `@${username} claimed ${theClaim}`);
+            }
+        }
+
         // Sees booba in chat
         if (isWordOrContains(text, 'booba'))
         {
